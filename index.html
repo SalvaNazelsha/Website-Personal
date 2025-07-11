@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Salva Nazelsha - Web Developer & UI/UX Designer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 10px;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .navbar-nav .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+            margin: 0 10px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .navbar-nav .nav-link:hover::after,
+        .navbar-nav .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.03)" points="0,0 1000,300 1000,1000 0,700"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.4);
+            color: white;
+        }
+
+        .social-icons {
+            margin-top: 40px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin: 0 10px;
+            line-height: 50px;
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-icons a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            color: white;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            height: 100%;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.03), transparent);
+            transition: all 0.5s ease;
+            transform: rotate(45deg);
+        }
+
+        .feature-card:hover::before {
+            animation: shimmer 1s ease-in-out;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* About Preview */
+        .about-preview {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .about-image {
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .about-image:hover {
+            transform: scale(1.02);
+        }
+
+        .about-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .project-image {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .card-text {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .btn-outline-primary {
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-primary:hover {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px 0;
+        }
+
+        .footer h5 {
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .footer .social-icons a {
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 1rem;
+        }
+
+        .footer .social-icons a:hover {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .about-title {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Salva Nazelsha</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">Tentang Saya</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="portfolio.html">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Kontak</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <img src="image/formal-sn.jpg" alt="Salva Nazelsha" class="profile-image" />
+                <h1 class="hero-title">Salva Nazelsha</h1>
+                <p class="hero-subtitle">
+                    <i class="fas fa-code me-2"></i>Web Developer 
+                    <i class="fas fa-paint-brush mx-3"></i>UI/UX Designer 
+                    <i class="fas fa-graduation-cap ms-2"></i>Student
+                </p>
+                <div class="mb-4">
+                    <span class="badge bg-light text-dark me-2 p-2">JavaScript</span>
+                    <span class="badge bg-light text-dark me-2 p-2">React</span>
+                    <span class="badge bg-light text-dark me-2 p-2">PHP</span>
+                    <span class="badge bg-light text-dark p-2">MySQL</span>
+                </div>
+                <a href="contact.html" class="cta-button">
+                    <i class="fas fa-paper-plane me-2"></i>Hubungi Saya
+                </a>
+                <div class="social-icons">
+                    <a href="https://github.com/SalvaNazelsha" target="_blank" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@salvanazelsha" target="_blank" title="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://www.instagram.com/slvanzlsha" target="_blank" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Keahlian & Layanan</h2>
+                <p>Solusi teknologi modern untuk kebutuhan digital Anda</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="feature-title">Web Development</h3>
+                        <p class="feature-description">
+                            Mengembangkan aplikasi web modern dengan teknologi terkini seperti HTML5, CSS3, 
+                            JavaScript ES6+, dan framework PHP. Fokus pada performance dan user experience.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3 class="feature-title">UI/UX Design</h3>
+                        <p class="feature-description">
+                            Merancang antarmuka yang intuitif dan menarik dengan prinsip design thinking. 
+                            Mengutamakan kemudahan pengguna dan estetika visual yang profesional.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3 class="feature-title">Network Administration</h3>
+                        <p class="feature-description">
+                            Konfigurasi dan administrasi jaringan komputer dengan sertifikasi VSGA. 
+                            Menguasai routing, switching, dan wireless network management.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Preview -->
+    <section class="about-preview">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="about-title">Tentang Saya</h2>
+                    <p class="about-text">
+                        Mahasiswa Sistem Informasi semester 4 di Universitas Kuningan dengan 
+                        passion yang tinggi dalam web development dan UI/UX design.
+                    </p>
+                    <p class="about-text">
+                        Memiliki sertifikasi profesional dari Dicoding Indonesia dan VSGA, 
+                        serta pengalaman dalam mengembangkan berbagai proyek web aplikasi 
+                        yang inovatif dan user-friendly.
+                    </p>
+                    <div class="mb-4">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    <span>4+ Sertifikasi</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    <span>10+ Proyek</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    <span>2+ Tahun Pengalaman</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    <span>Siap Magang</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="about.html" class="btn btn-light btn-lg">
+                        <i class="fas fa-user me-2"></i>Pelajari Lebih Lanjut
+                    </a>
+                </div>
+                <div class="col-lg-6">
+                    <img src="image/formal-sn.jpg" alt="About Preview" class="img-fluid about-image" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sertifikasi & Proyek Terbaru</h2>
+                <p>Pencapaian dan karya terbaik dalam perjalanan pengembangan skill</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card project-card">
+                        <img src="image/Front-End.jpg" class="project-image" alt="Front-End Certification" />
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-code text-primary me-2"></i>Front-End Web Development
+                            </h5>
+                            <p class="card-text">
+                                Sertifikasi Dicoding dengan fokus pada HTML5, CSS3, JavaScript ES6+ 
+                                dan pembuatan antarmuka web yang responsif dan interaktif.
+                            </p>
+                            <a href="portfolio.html" class="btn btn-outline-primary">
+                                <i class="fas fa-eye me-2"></i>Lihat Detail
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card project-card">
+                        <img src="image/Javascript.jpg" class="project-image" alt="JavaScript Certification" />
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fab fa-js-square text-warning me-2"></i>JavaScript Programming
+                            </h5>
+                            <p class="card-text">
+                                Menguasai JavaScript fundamental hingga advanced, termasuk DOM manipulation, 
+                                asynchronous programming, dan modern ES6+ features.
+                            </p>
+                            <a href="portfolio.html" class="btn btn-outline-primary">
+                                <i class="fas fa-eye me-2"></i>Lihat Detail
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card project-card">
+                        <img src="image/Pweb.jpg" class="project-image" alt="Web Programming Certification" />
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-laptop-code text-success me-2"></i>Web Programming
+                            </h5>
+                            <p class="card-text">
+                                Sertifikasi lengkap web programming dari Dicoding, mencakup 
+                                full-stack development dan database management.
+                            </p>
+                            <a href="portfolio.html" class="btn btn-outline-primary">
+                                <i class="fas fa-eye me-2"></i>Lihat Detail
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="portfolio.html" class="btn btn-primary btn-lg">
+                    <i class="fas fa-folder-open me-2"></i>Lihat Semua Portfolio
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Salva Nazelsha</h5>
+                    <p>Mahasiswa Sistem Informasi dengan spesialisasi Web Development & UI/UX Design. 
+                       Siap berkontribusi dalam proyek-proyek inovatif dan terus belajar teknologi terbaru.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <h5>Ikuti Saya</h5>
+                    <div class="social-icons">
+                        <a href="https://github.com/SalvaNazelsha" target="_blank" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@salvanazelsha" target="_blank" title="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.instagram.com/slvanzlsha" target="_blank" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4" />
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 Salva Nazelsha. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
